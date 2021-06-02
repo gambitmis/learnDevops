@@ -1,0 +1,65 @@
+version: '3.9'
+services:
+  db:
+    image: mariadb
+    restart: always
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    environment:
+      MARIADB_ROOT_PASSWORD: P@ssw0rd
+      MARIADB_USER: dbadmin
+      MARIADB_PASSWORD: P@ssw0rd
+      MARIADB_DATABASE: dga
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db/mysqldump:/docker-entrypoint-initdb.d
+    networks:
+      - internal
+    expose:
+      - 3306
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: mariadb
+        
+  phpmyadmin:
+    image: phpmyadmin
+    environment:
+      - PMA_HOSTS=db
+    ports:
+      - 8866:80
+    networks:
+      - internal
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: phpmyadmin
+
+  php:
+    #image: php:7.4.19-apache
+    build: ./php
+    image: webapp:v1
+    volumes:
+      - ./code:/var/www/html
+    ports:
+      - "8880:80"
+    networks:
+      - internal
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: httpd.access
+
+  nettool:
+    image: praqma/network-multitool
+    networks:
+      - internal
+
+volumes:
+  db_data: 
+
+networks:
+  internal:
+    external: true
