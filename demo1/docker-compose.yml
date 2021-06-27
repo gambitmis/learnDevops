@@ -13,9 +13,9 @@ services:
         restart: always
         command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
         environment:
-            MARIADB_ROOT_PASSWORD: ITI%C10uD
+            MARIADB_ROOT_PASSWORD: password
             MARIADB_USER: dbadmin
-            MARIADB_PASSWORD: ITI%C10uD
+            MARIADB_PASSWORD: password
             MARIADB_DATABASE: demo1
         volumes:
             - db_data:/var/lib/mysql
