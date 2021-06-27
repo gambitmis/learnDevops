@@ -1,0 +1,100 @@
+{% extends "template.html" %}
+
+{% block content %}
+  <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-md-4">
+        <div class="thumbnail">
+            <img src="{{ url_for('static',filename='img/flask.png') }}" alt="Lights" style="width:100%">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h1 class="text-center">FLASK ENV</h1>
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Environments</th>
+              <th scope="col">Values</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">HTTP PROTOCOL</th>
+              <td>{{ flask_env['serverProto'] }}</td>
+            </tr>
+            <tr>
+              <th scope="row">HTTP METHOD</th>
+              <td>{{ flask_env['httpMethod'] }}</td>
+            </tr>
+            <tr>
+              <th scope="row">HTTP REQUEST URI</th>
+              <td>{{ flask_env['requestUri'] }}</td>
+            </tr>
+            <tr>
+              <th scope="row">HTTP REMOTE IPADDR</th>
+              <td>{{ flask_env['remoteAddr'] }} port: {{ flask_env['remotePort'] }} </td>
+            </tr>
+            <tr>
+              <th scope="row">HTTP HOST</th>
+              <td>{{ flask_env['httpHost'] }}</td>
+            </tr>
+            <tr>
+              <th scope="row">HTTP USER AGENT</th>
+              <td>{{ flask_env['userAgent'] }}</td>
+            </tr>
+            <tr>
+              <th scope="row">HTTP ACCEPT ENCODING</th>
+              <td>{{ flask_env['httpAcceptEncoding'] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <h1 class="text-center">OS ENV</h1>
+        <table class="table table-striped table-hover table-light">
+          <thead>
+            <tr>
+              <th scope="col">Environments</th>
+              <th scope="col">Values</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">UTC TIMEZONE</th>
+              <td>{{ os_env['now_utc'] }}</td>
+            </tr>
+            <tr>
+              <th scope="row">TH TIMEZONE</th>
+              <td>{{ os_env['now_th'] }}</td>
+            </tr>
+            <tr>
+              <th scope="row">HOSTNAME</th>
+              <td>{{ os_env['hostName'] }}</td>
+            </tr>
+            <tr>
+              <th scope="row">LOCAL IP</th>
+              <td>{{ os_env['hostIP'] }}</td>
+            </tr>
+            <tr>
+              <th scope="row">UNAME</th>
+              <td>{{ os_env['uname'] }}</td>
+            </tr>
+            <tr>
+              <th scope="row">CPU</th>
+              <td>CORE CPU: {{ os_env['cpuCount']}} CPU LOAD AVG: 1MIN({{ os_env['cpuLoad1']}}) 5MIN({{ os_env['cpuLoad5']}}) 15MIN({{ os_env['cpuLoad15']}})</td>
+            </tr>
+            <tr>
+              <th scope="row">MEM USAGE</th>
+              <td>{{ os_env['memUsage']}} % </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Columns are always 50% wide, on mobile and desktop -->
+{% endblock %}

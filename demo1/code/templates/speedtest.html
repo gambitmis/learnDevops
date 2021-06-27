@@ -1,0 +1,39 @@
+{% extends "template.html" %}
+
+{% block content %}
+  <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-md-4">
+      <div class="thumbnail">
+          <img src="{{ url_for('static',filename='img/speedtest.png') }}" alt="Lights" style="width:100%">
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-md-center">
+      <h1 class="text-center">CHECK INTERNET SPEED ON YOUR SERVER</h1>
+      <p class="lead text-center">
+        Develope by Speedtest-cli on Python
+      </p>
+      <form action="{{ url_for('spdtest') }}" method="POST">
+        <div class="row justify-content-md-center">
+          <div class="col-md-1"><button type="submit" class="btn btn-outline-success" > {{ button }}</button></div>
+        </div>
+      </form>
+</div>
+  {% if res %}
+  <div class="row justify-content-md-center">
+    <div class="card" style="width: 36rem;">
+      <img src="{{ res['share'] }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">SAVE RESULT</h5>
+        <p class="card-text">Keep Speedtest Result in Database</p>
+        <a href="{{ url_for('spdtestSave',download=res['download'],upload=res['upload'],ping=res['ping'],zio=res['timestamp'] ) }}" class="btn btn-primary">SAVE</a>
+      </div>
+    </div>
+  </div>
+
+  {% endif %}
+</div>
+  <!-- Columns are always 50% wide, on mobile and desktop -->
+{% endblock %}
