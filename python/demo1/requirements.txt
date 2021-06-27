@@ -1,9 +1,0 @@
-flask
-flask-WTF
-pyMySQL
-pydantic
-pytz
-psutil
-speedtest-cli
-flask[async]
-python3-nmap
