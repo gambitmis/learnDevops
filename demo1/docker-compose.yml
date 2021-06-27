@@ -7,6 +7,10 @@ services:
             - ./code/:/app
         ports:
             - "5000:5000"
+        environment:
+            MARIADB_USER: dbadmin
+            MARIADB_PASSWORD: password
+            MARIADB_DATABASE: demo1           
     
     db:
         image: mariadb

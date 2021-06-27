@@ -10,14 +10,19 @@ import speedtest
 import inspect
 import pymysql.cursors
 
+# https://github.com/docker/compose/issues/1171
+username = os.environ['MARIADB_USER']
+password = os.environ['MARIADB_PASSWORD']
+dbName = os.environ['MARIADB_DATABASE']
+
 app = Flask(__name__)
 
 # Connect to the database
 def connectDB():
     connection = pymysql.connect(host='db',
-                                user='root',
-                                password='ITI%C10uD',
-                                database='demo1',
+                                user=username,
+                                password=password,
+                                database=dbName,
                                 cursorclass=pymysql.cursors.DictCursor)
     return connection
 
